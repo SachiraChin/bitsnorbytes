@@ -2,8 +2,6 @@ require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`,
 })
 
-// console.log("AI", process.env.APPLICATION_INSIGHTS_KEY)
-
 module.exports = {
     siteMetadata: {
         title: `bits nor bytes`,

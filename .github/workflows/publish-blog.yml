@@ -23,13 +23,19 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
 
+    - name: Replace application insights key
+      uses: ./.github/actions/replace
+      with:
+        files: .env
+        replacements: '$APPLICATION_INSIGHTS_KEY=${{ secrets.APPLICATION_INSIGHTS_KEY }}'
+      
     - name: Install packages 🔧
       run: |
         npm install
 
     - name: Build project 🔧
       run: |
-        GATSBY_APPLICATION_INSIGHTS_KEY=${{ secrets.APPLICATION_INSIGHTS_KEY }} npm run-script build
+        npm run-script build
 
     - name: Deploy to Azure WebApp 🚀
       uses: azure/webapps-deploy@v1

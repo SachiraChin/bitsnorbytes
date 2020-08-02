@@ -63,6 +63,7 @@ export default ({ data }) => {
         <HeaderDate>
           {post.frontmatter.date} - {post.fields.readingTime.text}
         </HeaderDate>
+        {post.frontmatter.legacy && <p><strong>This article was lost in time, but revived using archives at web.archive.org. The original article I wrote lost with the site backups I lost at the time. Original article at web.archive.org can be seen here: <a href={post.frontmatter.archiveUrl} target="_blank">{post.frontmatter.archiveUrl}</a></strong></p>}
         <MarkdownContent dangerouslySetInnerHTML={{ __html: post.html }} />
       </Content>
     </Layout>
@@ -78,6 +79,8 @@ export const pageQuery = graphql`
         date(formatString: "DD MMMM, YYYY")
         path
         title
+        legacy
+        archiveUrl
       }
       fields {
         readingTime {

@@ -22,6 +22,11 @@ const Content = styled.div`
 
 const GatsbyLink = styled.a`
   margin-left: 5px;
+  margin-right: 5px;
+`
+
+const GatsbyJuliaLink = styled.a`
+  margin-left: 5px;
 `
 
 const Footer = styled.footer`
@@ -47,9 +52,11 @@ const Layout = ({ children }) => (
           <main>{children}</main>
           <Footer>
             <p>
-            © {new Date().getFullYear()}, Built with
+            ©SachiraChin {new Date().getFullYear()}, based on
             {` `}
             </p>
+            <GatsbyJuliaLink href="https://www.gatsbyjs.org/starters/niklasmtj/gatsby-starter-julia/">gatsby-starter-julia</GatsbyJuliaLink>
+            <p>, built with</p>
             <GatsbyLink href="https://www.gatsbyjs.org">Gatsby</GatsbyLink>
           </Footer>
         </Content>

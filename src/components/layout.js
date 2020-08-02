@@ -9,6 +9,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 import styled from "@emotion/styled"
+import withAppInsights from '../services/AppInsights';
 
 import Header from "./header"
 import "./layout.css"
@@ -69,4 +70,4 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Layout
+export default withAppInsights(Layout)

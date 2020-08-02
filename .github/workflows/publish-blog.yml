@@ -1,4 +1,4 @@
-name: dotnet-monitor UI build and deploy to Azure Web App
+name: bitsnorbytes.com build and deploy to Azure Web App
 
 on:
   [push]

@@ -13,8 +13,11 @@ const ai = new ApplicationInsights({
         }
     }
 })
-if (process.env.APPLICATION_INSIGHTS_KEY)
-    ai.loadAppInsights()
+if (process.env.APPLICATION_INSIGHTS_KEY) {
+    ai.loadAppInsights();
+} else {
+    console.log('Application insights key not available.')
+}
 
 export default (Component) => withAITracking(reactPlugin, Component)
 export const appInsights = ai.appInsights

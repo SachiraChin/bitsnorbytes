@@ -9,14 +9,14 @@ if (!("XMLHttpRequest" in global)) {
 const reactPlugin = new ReactPlugin();
 const ai = new ApplicationInsights({
     config: {
-        instrumentationKey: process.env.APPLICATION_INSIGHTS_KEY,
+        instrumentationKey: process.env.GATSBY_APPLICATION_INSIGHTS_KEY,
         extensions: [reactPlugin],
         extensionConfig: {
             [reactPlugin.identifier]: { history: globalHistory }
         }
     }
 })
-if (process.env.APPLICATION_INSIGHTS_KEY) {
+if (process.env.GATSBY_APPLICATION_INSIGHTS_KEY) {
     ai.loadAppInsights();
 } else {
     console.log('Application insights key not available.')

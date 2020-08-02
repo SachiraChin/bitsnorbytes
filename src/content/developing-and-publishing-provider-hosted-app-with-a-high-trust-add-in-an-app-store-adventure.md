@@ -66,9 +66,9 @@ Now if you are thinking, “whhooo, hard part is done, easy part next”, I have
 
 Now we are proceeding to create new AAD app which is going to utilize SharePoint permissions set. You can use either “Application registrations” or “Application registrations (Preview)”, which currently show same permission sets in different layouts. We set redirect URL for the app and make application multi-tenant. Next is setting up SharePoint permissions. Under “SharePoint” (Preview) / “Office 365 SharePoint Online” you can find the permissions available for the app.
 
-Application registration (Preview) SharePoint permissions | Application registration Office 365 SharePoint Online permissions
-:-------------------------:|:-------------------------:
-![Application registration (Preview) SharePoint permissions](../images/Screen-Shot-2019-02-09-at-1.39.22-PM.png)|![Application registration Office 365 SharePoint Online permissions](../images/Screen-Shot-2019-02-09-at-1.41.56-PM.png)
+|                            Application registration (Preview) SharePoint permissions                             |                            Application registration Office 365 SharePoint Online permissions                             |
+| :--------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------: |
+| ![Application registration (Preview) SharePoint permissions](../images/Screen-Shot-2019-02-09-at-1.39.22-PM.png) | ![Application registration Office 365 SharePoint Online permissions](../images/Screen-Shot-2019-02-09-at-1.41.56-PM.png) |
 
 Now if you look closely at this, you may notice something very concerning, “Sites.FullControl.All” in preview and “Read and write items and lists in all site collections”, first thing came to my mind was, wait a second now, does it say “all site collections”? It indeed does. But for application we develop, we only need permissions to one site collection, the site collection which app is installed. There’s no use for app to ask full permissions for all site collections, and asking full permissions for ALL site collections is lot to ask. Even a very reasonable admin would just deny to give full permissions to all site collections for an external application.
 

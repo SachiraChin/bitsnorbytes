@@ -1,0 +1,39 @@
+name: dotnet-monitor UI build and deploy to Azure Web App
+
+on:
+  [push]
+
+env:
+  AZURE_WEBAPP_NAME: bitsnorbytes
+  AZURE_WEBAPP_PACKAGE_PATH: './public'
+  NODE_VERSION: '10.x'
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v2.3.1
+      with:
+        persist-credentials: false
+
+    - name: Install npm ${{ env.NODE_VERSION }} 🔧
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install packages 🔧
+      run: |
+        npm install
+
+    - name: Build project 🔧
+      run: |
+        npm build
+
+    - name: Deploy to Azure WebApp 🚀
+      uses: azure/webapps-deploy@v1
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

@@ -24,11 +24,10 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
 
     - name: Replace application insights key
-      uses: shitiomatic/str-replace@master
+      uses: datamonsters/replace-action@v2
       with:
-        find: "$APPLICATION_INSIGHTS_KEY"
-        replace: ${{ secrets.APPLICATION_INSIGHTS_KEY }}
-        include: ".env"
+        files: .env
+        replacements: '$APPLICATION_INSIGHTS_KEY=${{ secrets.APPLICATION_INSIGHTS_KEY }}'
       
     - name: Install packages 🔧
       run: |

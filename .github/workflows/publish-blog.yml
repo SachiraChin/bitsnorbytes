@@ -24,7 +24,7 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
 
     - name: Replace application insights key
-      uses: ./.github/actions/replace
+      uses: datamonsters/replace-action@v2
       with:
         files: .env
         replacements: '$APPLICATION_INSIGHTS_KEY=${{ secrets.APPLICATION_INSIGHTS_KEY }}'

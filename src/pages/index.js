@@ -27,38 +27,41 @@ const ReadingTime = styled.h5`
 `
 
 const IndexPage = ({ data }) => {
-  return (
-    <Layout>
-      <SEO title="" />
-      <Content>
-        <h1>bits nor bytes</h1>
-        {data.allMarkdownRemark.edges
-          .filter(({ node }) => {
-            const rawDate = node.frontmatter.rawDate
-            const date = new Date(rawDate)
-            return date < new Date()
-          })
-          .map(({ node }) => (
-            <div key={node.id}>
-              <Link
-                to={node.frontmatter.path}
-                css={css`
-                  text-decoration: none;
-                  color: inherit;
-                `}
-              >
-                <MarkerHeader>{node.frontmatter.title} </MarkerHeader>
-                <div>
-                  <ArticleDate>{node.frontmatter.date}</ArticleDate>
-                  <ReadingTime> - {node.fields.readingTime.text}</ReadingTime>
-                </div>
-                <p>{node.excerpt}</p>
-              </Link>
-            </div>
-          ))}
-      </Content>
-    </Layout>
-  )
+    return (
+        <Layout>
+            <SEO title="" />
+            <Content>
+                <h1>bits nor bytes</h1>
+                {data.allMarkdownRemark.edges
+                    .filter(({ node }) => {
+                        if (process.env.NODE_ENV === 'development') {
+                            return true;
+                        }
+                        const rawDate = node.frontmatter.rawDate
+                        const date = new Date(rawDate)
+                        return !node.frontmatter.draft && date < new Date()
+                    })
+                    .map(({ node }) => (
+                        <div key={node.id}>
+                            <Link
+                                to={node.frontmatter.path}
+                                css={css`
+                                    text-decoration: none;
+                                    color: inherit;
+                                    `}
+                            >
+                                <MarkerHeader>{node.frontmatter.title} </MarkerHeader>
+                                <div>
+                                    <ArticleDate>{node.frontmatter.date}</ArticleDate>
+                                    <ReadingTime> - {node.fields.readingTime.text}</ReadingTime>
+                                </div>
+                                <p>{node.excerpt}</p>
+                            </Link>
+                        </div>
+                    ))}
+            </Content>
+        </Layout>
+    )
 }
 
 export default IndexPage
@@ -72,7 +75,6 @@ export const query = graphql`
     }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { draft: { eq: false } } }
     ) {
       totalCount
       edges {

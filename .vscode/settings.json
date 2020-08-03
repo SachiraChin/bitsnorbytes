@@ -1,3 +1,10 @@
 {
-    "jshint.enable": false
+    "jshint.enable": false,
+    "grammarly.userWords": [
+        "yaml"
+    ],
+    "cSpell.words": [
+        "bitsnorbytes",
+        "webapps"
+    ]
 }

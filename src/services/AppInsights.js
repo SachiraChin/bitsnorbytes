@@ -2,10 +2,12 @@
 import { ApplicationInsights } from '@microsoft/applicationinsights-web'
 import { ReactPlugin, withAITracking } from '@microsoft/applicationinsights-react-js'
 import { globalHistory } from "@reach/router"
+
 if (!("XMLHttpRequest" in global)) {
-    global.XMLHttpRequest = require('xhr2');
+    global.XMLHttpRequest = undefined;
     global.XDomainRequest = undefined;
 }
+
 const reactPlugin = new ReactPlugin();
 const ai = new ApplicationInsights({
     config: {
@@ -16,6 +18,7 @@ const ai = new ApplicationInsights({
         }
     }
 })
+
 if (process.env.GATSBY_APPLICATION_INSIGHTS_KEY) {
     ai.loadAppInsights();
 } else {

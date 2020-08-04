@@ -69,7 +69,7 @@ After going through this article, I came up with below `web.config` file (which 
                 </rule>
                 <preConditions>
                     <preCondition name="IsCachePermanentlyFile">
-                        <add input="{REQUEST_FILENAME}" pattern="(.*\.js)|(.*\.css)|(.*\.png)|(.*\.jpg)|(.*\.ico)|(.*\.woff)|(.*\.woff2)" />
+                        <add input="{REQUEST_FILENAME}" pattern="((.*\.js)|(.*\.css)|(.*\.png)|(.*\.jpg)|(.*\.ico)|(.*\.woff)|(.*\.woff2))$" />
                     </preCondition>
                 </preConditions>
             </outboundRules>

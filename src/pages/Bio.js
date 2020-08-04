@@ -1,8 +1,8 @@
 import React from "react"
 
-import LandingBio from "../components/landing-bio"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import LandingBio from "../components/LandingBio"
+import Layout from "../components/Layout"
+import SEO from "../components/SEO"
 
 const Bio = () => (
   <Layout>

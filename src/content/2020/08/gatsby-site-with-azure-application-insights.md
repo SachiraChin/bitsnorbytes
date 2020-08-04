@@ -380,7 +380,7 @@ See our docs page for more info on this error: https://gatsby.dev/debug-html
     src/services/AppInsights.js:20:8
 ```
 
-Now, I thought as for `XMLHttpRequest`, there would be a package to import for `XDomainRequest` as well. It turned out that it actually does not have a package for that. It turns out that there is no package for that. That left me no option but to check out the code within `applicationinsights-web` for a possible solution. That's when I actually noticed the code which it threw the error in the first place,
+Now, I thought as for `XMLHttpRequest`, there would be a package to import for `XDomainRequest` as well. It turned out that there is no package for `XDomainRequest`. That left me no option but to check out the code within `applicationinsights-web` for a possible solution. That's when I actually noticed the code which it threw the error in the first place,
 
 [ApplicationInsights-JS/channels/applicationinsights-channel-js/src/Sender.ts](https://github.com/microsoft/ApplicationInsights-JS/blob/430caa1f9e525339e4614d61992fec0e305fcaa9/channels/applicationinsights-channel-js/src/Sender.ts#L230)
 
@@ -409,27 +409,51 @@ if (!("XMLHttpRequest" in global)) {
 }
 ```
 
-Now when I ran `gatsby build`, it worked without any issue.
+Now when I ran `gatsby build`, ~~it worked without any issue~~ was what I wanted to say, but I didn't, now I was hammered with new error,
 
-Before I came to this answer though, I came across a few other issues though. For example, I got an error saying `TypeError: Cannot set property 'snippetVer' of undefined`, this was when I tried `AppInsights.js` code as below,
+```bash
+Building static HTML failed
 
-```js
-// AppInsights.js
-import { ApplicationInsights } from '@microsoft/applicationinsights-web'
-import { ReactPlugin, withAITracking } from '@microsoft/applicationinsights-react-js'
-import { globalHistory } from "@reach/router"
-if (!("XMLHttpRequest" in global)) {
-    global.XMLHttpRequest = require('xhr2');
-    global.XDomainRequest = undefined;
-}
+See our docs page for more info on this error: https://gatsby.dev/debug-html
+
+
+  234 |                     snippetVer += ".lg";
+  235 |                 }
+> 236 |                 _this.properties.context.internal.snippetVer = snippetVer || "-";
+      | ^
+  237 |                 // apply updated properties to the global instance (snippet)
+  238 |                 for (var field in _this) {
+  239 |                     if (CoreUtils.isString(field) &&
+
+
+  WebpackError: TypeError: Cannot set property 'snippetVer' of undefined
+
+  - Initialization.js:236
+    node_modules/@microsoft/applicationinsights-web/dist-esm/Initialization.js:236:1
+
+  - Initialization.js:263
+    node_modules/@microsoft/applicationinsights-web/dist-esm/Initialization.js:263:1
+
+  - AppInsights.js:23
+    src/services/AppInsights.js:23:8
+
+  - 404.js:1
+    src/pages/404.js:1:1
 ```
 
-Details about this specific instance can be found in below GitHub issues,
+This error was easy to fix though, when I googled for this error, I came across this GitHub issue.
 
 [https://github.com/microsoft/ApplicationInsights-JS/issues/1321](https://github.com/microsoft/ApplicationInsights-JS/issues/1321)
+
+There I took the hint that, this specific issue may be caused by `@microsoft/applicationinsights-web@2.5.6`, so I installed `@microsoft/applicationinsights-web@2.5.3` which mentioned in that ticket, and VOILA!!!, it stopped me giving this error.
+
+At the moment, [@MSNev](https://github.com/MSNev) opened the discussion of this error in below issue, in the future, if someone needs more details about this, you may check out this issue for more details.
+
 [https://github.com/microsoft/ApplicationInsights-JS/issues/1334](https://github.com/microsoft/ApplicationInsights-JS/issues/1334)
 
 For now though, my final `AppInsights.js` looks like this and it works without any issue for the build.
+
+Azure Application Insights version: `@microsoft/applicationinsights-web@2.5.3`
 
 ```js
 // AppInsights.js

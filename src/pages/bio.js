@@ -6,7 +6,7 @@ import SEO from "../components/SEO"
 
 const Bio = () => (
   <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+    <SEO title="Bio" keywords={[`gatsby`, `application`, `react`]} />
     <LandingBio />
   </Layout>
 )

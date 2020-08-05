@@ -2,9 +2,10 @@ import { Link } from "gatsby"
 import styled from "@emotion/styled"
 import PropTypes from "prop-types"
 import React from "react"
+import { isMobile } from "react-device-detect";
 
 const Content = styled.div`
-  max-width: 80%;
+  max-width: ${isMobile ? '100%' : '80%'};
   padding: 1rem 1.0875rem;
   font-size: 1.2rem;
 `
@@ -73,25 +74,25 @@ const SiteHeader = styled.header`
 `
 
 const Header = ({ siteTitle }) => (
-  <SiteHeader>
-    <Content>
-      <p>
-        <HomeLink to="/">Home</HomeLink>
-        <NavLink to="/bio">Bio</NavLink>
-        <GitHubLink href="https://github.com/SachiraChin">
-          GitHub
+    <SiteHeader>
+        <Content>
+            <p>
+                <HomeLink to="/">Home</HomeLink>
+                <NavLink to="/bio">Bio</NavLink>
+                <GitHubLink href="https://github.com/SachiraChin">
+                    GitHub
         </GitHubLink>
-      </p>
-    </Content>
-  </SiteHeader>
+            </p>
+        </Content>
+    </SiteHeader>
 )
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
+    siteTitle: PropTypes.string,
 }
 
 Header.defaultProps = {
-  siteTitle: ``,
+    siteTitle: ``,
 }
 
 export default Header

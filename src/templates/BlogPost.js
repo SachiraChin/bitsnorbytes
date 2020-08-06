@@ -3,6 +3,8 @@ import { graphql } from "gatsby"
 import styled from "@emotion/styled"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
+import { useContext } from "react"
+import ThemeContext from '../theme/ThemeContext';
 
 const Content = styled.div`
   margin: 0 auto;
@@ -50,24 +52,53 @@ const MarkdownContent = styled.div`
   }
 `
 
+const MarkdownContentLight = styled(MarkdownContent)`
+  a {
+    background-image: linear-gradient(
+        rgba(255, 250, 150, 0.8),
+        rgba(255, 250, 150, 0.8)
+    );
+  }
+`
+
+const MarkdownContentDark = styled(MarkdownContent)`
+  a {
+    background-image: linear-gradient(
+        rgba(191, 240, 212, 0.5),
+        rgba(191, 240, 212, 0.5)
+    );
+  }
+`
+
+const BlogPostContent = ({post}) => {
+    const { theme } = useContext(ThemeContext);
+
+    return (
+        <>
+            <SEO
+                title={post.frontmatter.title}
+                description={post.frontmatter.description || post.excerpt}
+            />
+            <Content>
+                <MarkedHeader>{post.frontmatter.title}</MarkedHeader>
+                <HeaderDate>
+                    {post.frontmatter.date} - {post.fields.readingTime.text}
+                </HeaderDate>
+                {post.frontmatter.legacy && <p><strong>This article was lost in time, but revived using archives at web.archive.org. The original article I wrote lost with the site backups I lost at the time. Original article at web.archive.org can be seen here: <a href={post.frontmatter.archiveUrl} target="_blank" rel="noreferrer">{post.frontmatter.archiveUrl}</a></strong></p>}
+                {theme === 'light' ? <MarkdownContentLight dangerouslySetInnerHTML={{ __html: post.html }} /> : <MarkdownContentDark dangerouslySetInnerHTML={{ __html: post.html }} />}
+                
+            </Content>
+        </>
+    );
+}
+
 export default ({ data }) => {
-  const post = data.markdownRemark
-  return (
-    <Layout>
-      <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
-      />
-      <Content>
-        <MarkedHeader>{post.frontmatter.title}</MarkedHeader>
-        <HeaderDate>
-          {post.frontmatter.date} - {post.fields.readingTime.text}
-        </HeaderDate>
-        {post.frontmatter.legacy && <p><strong>This article was lost in time, but revived using archives at web.archive.org. The original article I wrote lost with the site backups I lost at the time. Original article at web.archive.org can be seen here: <a href={post.frontmatter.archiveUrl} target="_blank" rel="noreferrer">{post.frontmatter.archiveUrl}</a></strong></p>}
-        <MarkdownContent dangerouslySetInnerHTML={{ __html: post.html }} />
-      </Content>
-    </Layout>
-  )
+    const post = data.markdownRemark
+    return (
+        <Layout>
+            <BlogPostContent post={post}></BlogPostContent>
+        </Layout>
+    )
 }
 
 export const pageQuery = graphql`

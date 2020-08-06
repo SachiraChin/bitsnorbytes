@@ -11,9 +11,11 @@ import { StaticQuery, graphql } from "gatsby"
 import styled from "@emotion/styled"
 import withAppInsights from '../services/AppInsights';
 import { isMobile } from "react-device-detect";
+import ThemeProvider from '../theme/ThemeProvider';
 
 import Header from "./Header"
 import "./layout.css"
+import "../styles/global.js"
 
 const Content = styled.div`
   margin: 0 auto;
@@ -22,13 +24,9 @@ const Content = styled.div`
   padding-top: 0;
 `
 
-const GatsbyLink = styled.a`
-  margin-left: 5px;
-  margin-right: 5px;
-`
-
-const GatsbyJuliaLink = styled.a`
-  margin-left: 5px;
+const ExternalLink = styled.a`
+//   margin-left: 5px;
+//   margin-right: 5px;
 `
 
 const Footer = styled.footer`
@@ -38,51 +36,66 @@ const Footer = styled.footer`
 
   p {
       padding-right: 5px;
+      padding-left: 5px;
   }
-  ${isMobile ? `
-  p {
-      width: 100%;
-  }
-  ` : 'display: flex;'}
 `
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+const DesktopFooter = styled(Footer)`
+    display: flex;
+`;
+const MobileFooter = styled(Footer)`
+    p {
+        width: 100%;
+    }
+`;
+
+const Layout = ({ children }) => {
+    const CurrentFooter = isMobile ? MobileFooter : DesktopFooter;
+
+    return (
+        <StaticQuery
+            query={graphql`
+          query SiteTitleQuery {
+            site {
+              siteMetadata {
+                title
+              }
+            }
           }
-        }
-      }
-    `}
-    render={data => (
-      <>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <Content>
-          <main>{children}</main>
-          <Footer>
-            <p>
-                ©SachiraChin {new Date().getFullYear()}{!isMobile && ','}
-            </p>
-            <p>
-                based on
-                <GatsbyJuliaLink href="https://www.gatsbyjs.org/starters/niklasmtj/gatsby-starter-julia/">gatsby-starter-julia</GatsbyJuliaLink>,
-            </p>
-            <p>
-                built with
-                <GatsbyLink href="https://www.gatsbyjs.org">Gatsby</GatsbyLink>
-            </p>
-          </Footer>
-        </Content>
-      </>
-    )}
-  />
-)
+        `}
+            render={data => (
+                <>
+                    <ThemeProvider>
+                        <Header siteTitle={data.site.siteMetadata.title} />
+                        <Content>
+                            <main>{children}</main>
+                            <CurrentFooter>
+                                <p>
+                                    ©SachiraChin {new Date().getFullYear()}
+                                </p>
+                                {!isMobile && <>&#5867;&#5867;</>}
+                                <p>
+                                    based on <ExternalLink href="https://www.gatsbyjs.org/starters/niklasmtj/gatsby-starter-julia/" target="_blank">gatsby-starter-julia</ExternalLink> by <ExternalLink href="https://github.com/niklasmtj" target="_blank">Niklas Metje</ExternalLink>
+                                </p>
+                                {!isMobile && <>&#5867;&#5867;</>}
+                                <p>
+                                    dark mode from <ExternalLink href="https://twitter.com/divyanshu013" target="_blank">Divyanshu Maithani</ExternalLink>'s <ExternalLink href="https://divyanshu013.dev/blog/gatsby-dark-mode/" target="_blank">post</ExternalLink>
+                                </p>
+                                {!isMobile && <>&#5867;&#5867;</>}
+                                <p>
+                                    built with <ExternalLink href="https://www.gatsbyjs.org" target="_blank">Gatsby</ExternalLink>
+                                </p>
+                            </CurrentFooter>
+                        </Content>
+                    </ThemeProvider>
+                </>
+            )}
+        />
+    )
+}
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
 }
 
 export default withAppInsights(Layout)

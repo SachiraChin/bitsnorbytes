@@ -1,0 +1,85 @@
+
+code {
+    background-color: hsla(0, 0%, 0%, 0.04);
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: "CascadiaCode", monospace, monospace;
+    font-size: 1em;
+}
+
+code {
+    font-size: 0.8rem;
+    line-height: 1.45rem;
+}
+
+kbd {
+    font-size: 0.8rem;
+    line-height: 1.45rem;
+}
+
+samp {
+    font-size: 0.8rem;
+    line-height: 1.45rem;
+}
+
+pre {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 1.45rem;
+    font-size: 0.8rem;
+    line-height: 1.42;
+    background: hsla(0, 0%, 0%, 0.04);
+    border-radius: 3px;
+    overflow: auto;
+    word-wrap: normal;
+    padding: 1.45rem;
+}
+
+tt,
+code {
+    background-color: hsla(0, 0%, 0%, 0.04);
+    border-radius: 3px;
+    font-family: "CascadiaCode", "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
+        "Liberation Mono", Menlo, Courier, monospace;
+    padding: 0;
+}
+
+pre code {
+    background: none;
+    line-height: 1.42;
+}
+
+code:before,
+code:after,
+tt:before,
+tt:after {
+    letter-spacing: -0.2em;
+    content: " ";
+}
+
+pre code:before,
+pre code:after,
+pre tt:before,
+pre tt:after {
+    content: "";
+}
+
+.gatsby-highlight {
+    /* background-color: #1d1f21; */
+    /* border-radius: 0.3em; */
+    /* margin: 0.5em 0; */
+    /* padding: 1em; */
+    overflow: auto;
+    margin-bottom: 1.45rem;
+}
+
+.gatsby-highlight pre[class*="language-"].line-numbers {
+    padding: 0;
+    padding-left: 2.8em;
+    overflow: initial;
+}

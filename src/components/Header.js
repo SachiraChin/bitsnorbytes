@@ -1,8 +1,13 @@
 import { Link } from "gatsby"
+import { useContext } from "react"
 import styled from "@emotion/styled"
 import PropTypes from "prop-types"
 import React from "react"
 import { isMobile } from "react-device-detect";
+import ThemeContext from '../theme/ThemeContext';
+import { BACKGROUND_TRANSITION_TIME, getTheme } from '../theme/ThemeManager';
+import GitHubLogo from '../images/github.inline.svg'
+import TwitterLogo from '../images/twitter.inline.svg'
 
 const Content = styled.div`
   max-width: ${isMobile ? '100%' : '80%'};
@@ -12,10 +17,12 @@ const Content = styled.div`
 
 const NavLink = styled(Link)`
   color: black;
-  margin-left: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
   text-decoration: none;
   display: inline-block;
   position: relative;
+  color: inherit;
 
   ::after {
     content: "";
@@ -36,12 +43,29 @@ const NavLink = styled(Link)`
   }
 `
 
-const GitHubLink = styled.a`
+const Button = styled('button')(props => ({
+    marginRight: '0px',
+    display: 'inline-block',
+    position: 'relative',
+	justifyContent: 'center',
+	background: 'transparent',
+	border: `none`,
+	cursor: 'pointer',
+    color: 'inherit',
+    ":focus": {
+        border: 0,
+        outline: 0,
+    }
+}));
+
+const ExternalLink = styled.a`
   color: black;
-  margin-left: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
   text-decoration: none;
   display: inline-block;
   position: relative;
+  color: inherit;
 
   ::after {
     content: "";
@@ -60,10 +84,6 @@ const GitHubLink = styled.a`
     transform: scaleX(1);
     transform-origin: bottom left;
   }
-`
-
-const HomeLink = styled(NavLink)`
-  margin-left: 0;
 `
 
 const SiteHeader = styled.header`
@@ -73,19 +93,52 @@ const SiteHeader = styled.header`
   justify-content: center;
 `
 
-const Header = ({ siteTitle }) => (
-    <SiteHeader>
-        <Content>
-            <p>
-                <HomeLink to="/">Home</HomeLink>
-                <NavLink to="/bio">Bio</NavLink>
-                <GitHubLink href="https://github.com/SachiraChin">
-                    GitHub
-        </GitHubLink>
-            </p>
-        </Content>
-    </SiteHeader>
-)
+const GitHubLogoStyled = styled(GitHubLogo)(props => ({
+    height: '24px',
+    width: '24px',
+    fill: props.theme.name === 'light' ? 'black' : 'white'
+}))
+
+const TwitterLogoStyled = styled(TwitterLogo)(props => ({
+    height: '24px',
+    width: '24px',
+    fill: props.theme.name === 'light' ? 'black' : 'white'
+}))
+
+const Header = ({ siteTitle }) => {
+    const { theme, toggleTheme } = useContext(ThemeContext);
+    const { background } = getTheme(theme);
+    
+    return (
+        <SiteHeader>
+            <Content>
+                <p>
+                    <NavLink to="/">Home</NavLink>
+                    {!isMobile && <>&#5867;</>}
+                    <NavLink to="/bio">Bio</NavLink>
+                    {!isMobile && <>&#5867;</>}
+                    <ExternalLink href="https://github.com/SachiraChin" target="_blank"><GitHubLogoStyled /></ExternalLink>
+                    {!isMobile && <>&#5867;</>}
+                    <ExternalLink href="https://twitter.com/SachiraChin" target="_blank"><TwitterLogoStyled /></ExternalLink>
+                    {!isMobile && <>&#5867;</>}
+                    <Button
+                        onClick={toggleTheme}
+                        className="container"
+                        css={{
+                            background,
+                            transitionDuration: '0s',
+                            // delay background-color transition for nicer animation
+                            transitionDelay: theme === 'dark' ? '0s' : BACKGROUND_TRANSITION_TIME,
+                            transitionProperty: 'background-color, color',
+                        }}
+                    >
+                        {'[' + (theme === 'light' ? 'Light' : 'Dark') + (isMobile ? ']' : ' Mode]')}
+                    </Button>
+                </p>
+            </Content>
+        </SiteHeader>
+    )
+}
 
 Header.propTypes = {
     siteTitle: PropTypes.string,

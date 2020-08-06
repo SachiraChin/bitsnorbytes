@@ -1,0 +1,146 @@
+
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted;
+}
+
+b,
+strong {
+    font-weight: inherit;
+    font-weight: bolder;
+}
+
+dfn {
+    font-style: italic;
+}
+
+mark {
+    background-color: #ff0;
+    color: #000;
+}
+
+small {
+    font-size: 80%;
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+figure {
+    margin: 1em 40px;
+}
+
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
+
+hr {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    margin-bottom: calc(1.45rem - 1px);
+    background: hsla(0, 0%, 0%, 0.2);
+    border: none;
+    height: 1px;
+}
+
+p {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    margin-bottom: 1.45rem;
+}
+
+blockquote {
+    margin-left: 1.45rem;
+    margin-right: 1.45rem;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    margin-bottom: 1.45rem;
+}
+
+address {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    margin-bottom: 1.45rem;
+}
+
+b {
+    font-weight: bold;
+}
+
+strong {
+    font-weight: bold;
+}
+
+blockquote *:last-child {
+    margin-bottom: 0;
+}
+
+p *:last-child {
+    margin-bottom: 0;
+}
+
+abbr {
+    border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
+    cursor: help;
+}
+
+acronym {
+    border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
+    cursor: help;
+}
+
+abbr[title] {
+    border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
+    cursor: help;
+    text-decoration: none;
+}

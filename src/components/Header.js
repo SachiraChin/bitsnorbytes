@@ -8,6 +8,8 @@ import ThemeContext from '../theme/ThemeContext';
 import { BACKGROUND_TRANSITION_TIME, getTheme } from '../theme/ThemeManager';
 import GitHubLogo from '../images/github.inline.svg'
 import TwitterLogo from '../images/twitter.inline.svg'
+import MoonIcon from '../images/moon.inline.svg'
+import LightIcon from '../images/light.inline.svg'
 
 const Content = styled.div`
   max-width: ${isMobile ? '100%' : '80%'};
@@ -105,6 +107,18 @@ const TwitterLogoStyled = styled(TwitterLogo)(props => ({
     fill: props.theme.name === 'light' ? 'black' : 'white'
 }))
 
+const MoonIconStyled = styled(MoonIcon)(props => ({
+    height: '24px',
+    width: '24px',
+    fill: 'white'
+}))
+
+const LightIconStyled = styled(LightIcon)(props => ({
+    height: '24px',
+    width: '24px',
+    fill: 'black'
+}))
+
 const Header = ({ siteTitle }) => {
     const { theme, toggleTheme } = useContext(ThemeContext);
     const { background } = getTheme(theme);
@@ -132,7 +146,8 @@ const Header = ({ siteTitle }) => {
                             transitionProperty: 'background-color, color',
                         }}
                     >
-                        {'[' + (theme === 'light' ? 'Light' : 'Dark') + (isMobile ? ']' : ' Mode]')}
+                        {/* {'[' + (theme === 'light' ? 'Light' : 'Dark') + (isMobile ? ']' : ' Mode]')} */}
+                        {theme === 'light' ? <LightIconStyled /> : <MoonIconStyled />}
                     </Button>
                 </p>
             </Content>

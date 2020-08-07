@@ -52,18 +52,8 @@ const LandingBio = () => (
               id
               html
               frontmatter {
-                title
-                date(formatString: "DD MMMM, YYYY")
-                rawDate: date
-                path
+                draft
               }
-              fields {
-                slug
-                readingTime {
-                  text
-                }
-              }
-              excerpt(pruneLength: 360)
             }
           }
         }
@@ -81,7 +71,7 @@ const LandingBio = () => (
                     return true;
                 }
                 
-                return false;
+                return node.frontmatter.draft === false;
             })
             .map(({ node }) => (
                 <MarkdownContainer key={node.id} dangerouslySetInnerHTML={{ __html: node.html }} />

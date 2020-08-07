@@ -3,6 +3,7 @@ title: "Gatsby site with Azure Web App and Application Insights"
 date: "2020-08-02"
 draft: false
 path: "/2020/gatsby-site-with-azure-application-insights"
+type: 'blog'
 ---
 
 As it is for my other blog posts, this post is also a story about a few things I've learned while working my most recent project, this web site!

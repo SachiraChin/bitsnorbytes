@@ -10,6 +10,7 @@ import GitHubLogo from '../images/github.inline.svg'
 import TwitterLogo from '../images/twitter.inline.svg'
 import MoonIcon from '../images/moon.inline.svg'
 import LightIcon from '../images/light.inline.svg'
+import LinkedInLogo from '../images/linkedin.inline.svg'
 
 const Content = styled.div`
   max-width: ${isMobile ? '100%' : '80%'};
@@ -107,6 +108,12 @@ const TwitterLogoStyled = styled(TwitterLogo)(props => ({
     fill: props.theme.name === 'light' ? 'black' : 'white'
 }))
 
+const LinkedInLogoStyled = styled(LinkedInLogo)(props => ({
+    height: '24px',
+    width: '24px',
+    fill: props.theme.name === 'light' ? 'black' : 'white'
+}))
+
 const MoonIconStyled = styled(MoonIcon)(props => ({
     height: '24px',
     width: '24px',
@@ -134,6 +141,8 @@ const Header = ({ siteTitle }) => {
                     <ExternalLink href="https://github.com/SachiraChin" target="_blank"><GitHubLogoStyled /></ExternalLink>
                     {!isMobile && <>&#5867;</>}
                     <ExternalLink href="https://twitter.com/SachiraChin" target="_blank"><TwitterLogoStyled /></ExternalLink>
+                    {!isMobile && <>&#5867;</>}
+                    <ExternalLink href="https://www.linkedin.com/in/sachirachinthana/" target="_blank"><LinkedInLogoStyled /></ExternalLink>
                     {!isMobile && <>&#5867;</>}
                     <Button
                         onClick={toggleTheme}

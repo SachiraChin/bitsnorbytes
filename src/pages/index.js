@@ -75,6 +75,7 @@ export const query = graphql`
     }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { type: { eq: "blog" } } }
     ) {
       totalCount
       edges {
@@ -92,7 +93,7 @@ export const query = graphql`
               text
             }
           }
-          excerpt
+          excerpt(pruneLength: 360)
         }
       }
     }

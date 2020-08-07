@@ -5,6 +5,7 @@ draft: false
 path: "/azure-site-extensions"
 legacy: true
 archiveUrl: https://web.archive.org/web/20150728052927/http://bitsnorbytes.com/2015/02/azure-site-extensions/
+type: 'blog'
 ---
 
 It’s not been a month since I’ve started blogging, and when I had to choose where to host my blog, I thought “Why Not Azure?”, I like Azure and I already have some experience using Azure. So, I created WordPress site on Azure and started blogging.

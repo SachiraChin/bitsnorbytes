@@ -5,6 +5,7 @@ draft: false
 path: "/run-asp-net-vnext-application-on-linux-with-docker"
 legacy: true
 archiveUrl: https://web.archive.org/web/20150728052852/http://bitsnorbytes.com/2015/01/run-asp-net-vnext-application-on-linux-with-docker/
+type: 'blog'
 ---
 
 While surfing MSDN blogs today early morning, I saw this blog post about [hosting ASP.Net application in Linux virtual machine in Azure](https://devblogs.microsoft.com/aspnet/running-asp-net-5-applications-in-linux-containers-with-docker/). After I read this great blog post, first thing came to my mind was why don’t I install Linux locally on a VM and try the same scenario. In this blog post I’ll describe step by step installation and configuration of Ubuntu, Docker and run ASP.Net application in it.

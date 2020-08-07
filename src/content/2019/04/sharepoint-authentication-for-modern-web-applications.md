@@ -3,6 +3,7 @@ title: "SharePoint authentication for modern web applications"
 date: "2019-04-16"
 draft: false
 path: "/sharepoint-authentication-for-modern-web-applications"
+type: 'blog'
 ---
 
 ```SharePoint.Authentication``` is an inject-able SharePoint context and token helper which can be used in multi-tenant applications. Abilities of this library extended by its sister library ```SharePoint.Authentication.Owin```.

@@ -34,7 +34,9 @@ exports.createPages = ({ graphql, actions }) => {
   const blogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
   return graphql(`
     {
-      allMarkdownRemark {
+      allMarkdownRemark (
+        filter: { frontmatter: { type: { eq: "blog" } } }
+      ) {
         edges {
           node {
             frontmatter {

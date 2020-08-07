@@ -5,6 +5,7 @@ draft: false
 path: "/visual-studio-2015-npm-bower-and-grunt-part-1"
 legacy: true
 archiveUrl: https://web.archive.org/web/20150811084242/http://bitsnorbytes.com/2015/03/visual-studio-2015-npm-bower-and-grunt-part-1/
+type: 'blog'
 ---
 
 Few days back Microsoft released Visual Studio 2015 CTP 6, I have been using Visual Studio 2015 since the early previews and when it comes to new changes they brought to Visual Studio and Microsoft ecosystem, it’s mind blowing. It’s really nice to see where the company goes with all the new things.

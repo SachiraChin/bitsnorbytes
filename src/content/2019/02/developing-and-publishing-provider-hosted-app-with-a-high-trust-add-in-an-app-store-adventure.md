@@ -3,6 +3,7 @@ title: "Developing and publishing provider hosted app with a high-trust add-in: 
 date: "2019-02-06"
 draft: false
 path: "/developing-and-publishing-provider-hosted-app-with-a-high-trust-add-in-an-app-store-adventure"
+type: 'blog'
 ---
 
 Reason I thought to write this blog is due to all hardships I met while working on recent project which needed high-trust for SharePoint site collection. This project was a migration from exiting SharePoint server side app to WebAPI+ReactJS app. Requirement from client was quite simple, he wanted

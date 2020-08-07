@@ -46,7 +46,7 @@ Please go through [this](https://web.archive.org/web/20150728052852/https://docs
 
 After finish installing Docker, when you run docker you should get output as below screen.
 
-![docker](../images/Untitled-1024x768.png)
+![docker](Untitled-1024x768.png)
 
 ## Prepare Docker container
 
@@ -118,7 +118,7 @@ $ sudo docker ps
 
 5. Goto http://localhost from browser
 
-![app](../images/linux-local-asp-site-screen-1024x768.png)
+![app](linux-local-asp-site-screen-1024x768.png)
 
 Now you have a ASP.Net vNext site running on Linux with Docker. 😊
 

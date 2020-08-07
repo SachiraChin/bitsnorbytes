@@ -1,5 +1,3 @@
-
-
 audio,
 canvas,
 progress,
@@ -41,4 +39,9 @@ figure {
     padding-right: 0;
     padding-top: 0;
     margin-bottom: 1.45rem;
+}
+
+.gatsby-resp-image-wrapper {
+    margin-left: inherit !important;
+    margin-right: inherit !important;
 }

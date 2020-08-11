@@ -497,7 +497,7 @@ This error was easy to fix though, when I googled for this error, I came across 
 
 There I took the hint that, this specific issue may be caused by `@microsoft/applicationinsights-web@2.5.6`, so I installed `@microsoft/applicationinsights-web@2.5.3` which mentioned in that ticket, and VOILA!!!, it stopped me giving this error.
 
-This issue has been fixed with `@microsoft/applicationinsights-web@2.5.7`, you can find more details about it in below GitHub issue. ~~At the moment, [@MSNev](https://github.com/MSNev) opened the discussion of this error in below issue, in the future, if someone needs more details about this, you may check out this issue for more details.~~
+This issue has been fixed with `@microsoft/applicationinsights-web@2.5.7`, you can find more details about it in below GitHub issue. Thank you [kryalama](https://github.com/kryalama) for the fix! ~~At the moment, [@MSNev](https://github.com/MSNev) opened the discussion of this error in below issue, in the future, if someone needs more details about this, you may check out this issue for more details.~~
 
 [https://github.com/microsoft/ApplicationInsights-JS/issues/1334](https://github.com/microsoft/ApplicationInsights-JS/issues/1334)
 
@@ -539,6 +539,6 @@ export const appInsights = ai.appInsights
 
 ## Conclusion
 
-Throughout the process of converting my site to `Gatsby` was a big learning experience for me. I learned a lot about `Gatsby`, about GitHub Actions, Azure WebSites with LetsEncrypt encryption, and finally, integration to Azure Application Insights to static web sites. For the last one though, I'm still not sure if this is an issue with how I setup the site or an issue with how `Gatsby` build applications. Either way, I have a working fix which allows me to continue using Application Insights in my site. I call it a win. 😊
+Throughout the process of converting my site to `Gatsby` was a big learning experience for me. I learned a lot about `Gatsby`, about GitHub Actions, Azure WebSites with LetsEncrypt encryption, and finally, integration to Azure Application Insights to static web sites. Though I had few troubles with Azure Application Insights initially, the workaround I mentioned here keep my site up and running at the time, then quick solution from [kryalama](https://github.com/kryalama) allowed me to use the tooling as it meant to be. ~~For the last one though, I'm still not sure if this is an issue with how I setup the site or an issue with how `Gatsby` build applications. Either way, I have a working fix which allows me to continue using Application Insights in my site. I call it a win. 😊~~ With that, my adventure with setting up the Gatsby site ended with remarkable results. 😁😁
 
 Hope you learned something through this experience of mine. Cheers!

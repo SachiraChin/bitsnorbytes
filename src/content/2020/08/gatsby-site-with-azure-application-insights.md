@@ -214,7 +214,56 @@ export default (Component) => withAITracking(reactPlugin, Component)
 export const appInsights = ai.appInsights
 ```
 
-The change I added was between lines 17-21, where it invokes `ai.loadAppInsights()` only when `process.env.GATSBY_APPLICATION_INSIGHTS_KEY` is present. Thinking my work is done, I ran `gatsby build` and alas, I'm hit with an error,
+The change I added was between lines 17-21, where it invokes `ai.loadAppInsights()` only when `process.env.GATSBY_APPLICATION_INSIGHTS_KEY` is present. After completing this, I had to change my GitHub actions to include AAI key, which I have done as below, `Line 32`
+
+```yml
+name: bitsnorbytes.com build and deploy to Azure Web App
+
+on:
+  [push]
+
+env:
+  AZURE_WEBAPP_NAME: bitsnorbytes
+  AZURE_WEBAPP_PACKAGE_PATH: './public'
+  NODE_VERSION: '10.x'
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v2.3.1
+      with:
+        persist-credentials: false
+
+    - name: Install npm ${{ env.NODE_VERSION }} 🔧
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install packages 🔧
+      run: |
+        npm install
+
+    - name: Build project 🔧
+      run: |
+        GATSBY_APPLICATION_INSIGHTS_KEY=${{ secrets.APPLICATION_INSIGHTS_KEY }} npm run-script build // highlight-line
+
+    - name: Deploy to Azure WebApp 🚀
+      uses: azure/webapps-deploy@v1
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+```
+
+### `@microsoft/applicationinsights-web@2.5.6` error
+
+This section is dedicated to few errors I got when I was using `@microsoft/applicationinsights-web@2.5.6`, this error has been fixed in `@microsoft/applicationinsights-web@2.5.7`. Please ignore this section if are already using `@microsoft/applicationinsights-web@2.5.7` or later, but if you are seeing this error on a different context, reading through this may help you to find an answer.
+
+At the time I writing this article, I was using `@microsoft/applicationinsights-web@2.5.6` for analytics and when I used `AppInsights.js` mentioned above, I got an error like this.
 
 ```bash
 WebpackError: ReferenceError: XMLHttpRequest is not defined
@@ -448,11 +497,11 @@ This error was easy to fix though, when I googled for this error, I came across 
 
 There I took the hint that, this specific issue may be caused by `@microsoft/applicationinsights-web@2.5.6`, so I installed `@microsoft/applicationinsights-web@2.5.3` which mentioned in that ticket, and VOILA!!!, it stopped me giving this error.
 
-At the moment, [@MSNev](https://github.com/MSNev) opened the discussion of this error in below issue, in the future, if someone needs more details about this, you may check out this issue for more details.
+This issue has been fixed with `@microsoft/applicationinsights-web@2.5.7`, you can find more details about it in below GitHub issue. ~~At the moment, [@MSNev](https://github.com/MSNev) opened the discussion of this error in below issue, in the future, if someone needs more details about this, you may check out this issue for more details.~~
 
 [https://github.com/microsoft/ApplicationInsights-JS/issues/1334](https://github.com/microsoft/ApplicationInsights-JS/issues/1334)
 
-For now though, my final `AppInsights.js` looks like this and it works without any issue for the build.
+At the time ~~For now though~~, my final `AppInsights.js` looks like this and it works without any issue for the build.
 
 Azure Application Insights version: `@microsoft/applicationinsights-web@2.5.3`
 

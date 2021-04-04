@@ -1,7 +1,5 @@
 name: bitsnorbytes.com build and deploy to Azure Web App
 
-environment: Beta
-
 on:
   [push]
 
@@ -11,8 +9,11 @@ env:
   NODE_VERSION: '14.x'
 
 jobs:
-  build-and-deploy:
+  build-and-deploy-beta:
     name: Build and Deploy
+    environment:
+      name: Beta
+      url: https://bitsnorbytes-beta.azurewebsites.net
     runs-on: ubuntu-latest
     steps:
     - name: Checkout 🛎️

@@ -36,6 +36,7 @@ jobs:
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
   deploy-beta:
+    needs: build
     name: Deploy Beta
     environment: Beta
     runs-on: ubuntu-latest

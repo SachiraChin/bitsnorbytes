@@ -8,18 +8,10 @@ import { globalHistory } from "@reach/router"
 //     global.XDomainRequest = undefined;
 // }
 
-let applicationInsightsKey;
-
-if (process.env.GATSBY_APPLICATION_INSIGHTS_KEY && process.env.GATSBY_APPLICATION_INSIGHTS_KEY != '') {
-    applicationInsightsKey = process.env.GATSBY_APPLICATION_INSIGHTS_KEY;
-} else {
-    applicationInsightsKey = '${{ secrets.APPLICATION_INSIGHTS_KEY }}'
-}
-
 const reactPlugin = new ReactPlugin();
 const ai = new ApplicationInsights({
     config: {
-        instrumentationKey: applicationInsightsKey,
+        instrumentationKey: process.env.GATSBY_APPLICATION_INSIGHTS_KEY,
         extensions: [reactPlugin],
         extensionConfig: {
             [reactPlugin.identifier]: { history: globalHistory }
@@ -27,7 +19,7 @@ const ai = new ApplicationInsights({
     }
 })
 
-if (applicationInsightsKey && applicationInsightsKey != '' && applicationInsightsKey == '${{ secrets.APPLICATION_INSIGHTS_KEY }}') {
+if (process.env.GATSBY_APPLICATION_INSIGHTS_KEY) {
     ai.loadAppInsights();
 } else {
     console.log('Application insights key not available.')

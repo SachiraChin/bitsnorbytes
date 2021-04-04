@@ -1,12 +1,14 @@
 name: bitsnorbytes.com build and deploy to Azure Web App
 
+environment: Beta
+
 on:
   [push]
 
 env:
   AZURE_WEBAPP_NAME: bitsnorbytes
   AZURE_WEBAPP_PACKAGE_PATH: './public'
-  NODE_VERSION: '10.x'
+  NODE_VERSION: '14.x'
 
 jobs:
   build-and-deploy:

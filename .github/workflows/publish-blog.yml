@@ -1,7 +1,13 @@
 name: bitsnorbytes.com build and deploy to Azure Web App
 
 on:
-  [push]
+  push:
+    branches:
+    - main
+  workflow_dispatch:
+    branches:
+    - main
+
 
 env:
   AZURE_WEBAPP_PACKAGE_PATH: './public'

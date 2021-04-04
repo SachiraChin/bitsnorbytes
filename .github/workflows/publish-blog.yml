@@ -4,16 +4,13 @@ on:
   [push]
 
 env:
-  AZURE_WEBAPP_NAME: bitsnorbytes
   AZURE_WEBAPP_PACKAGE_PATH: './public'
   NODE_VERSION: '14.x'
+  ARTIFACT_NAME: 'app-build'
 
 jobs:
-  build-and-deploy-beta:
-    name: Build and Deploy
-    environment:
-      name: Beta
-      url: https://bitsnorbytes-beta.azurewebsites.net
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
     - name: Checkout 🛎️
@@ -33,10 +30,42 @@ jobs:
     - name: Build project 🔧
       run: |
         GATSBY_APPLICATION_INSIGHTS_KEY=${{ secrets.APPLICATION_INSIGHTS_KEY }} npm run-script build
-
-    - name: Deploy to Azure WebApp 🚀
-      uses: azure/webapps-deploy@v1
+    - uses: actions/upload-artifact@v2
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        name: ${{ env.ARTIFACT_NAME }}
+        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+  deploy-beta:
+    name: Deploy Prod
+    environment:
+      name: Beta
+      url: ${{ secrets.APPLICATION_URL }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+    - name: Deploy to Azure WebApp 🚀
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ secrets.APPLICATION_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+  deploy-prod:
+    needs: deploy-beta
+    name: Deploy Prod
+    environment:
+      name: Prod
+      url: ${{ secrets.APPLICATION_URL }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+    - name: Deploy to Azure WebApp 🚀
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ secrets.APPLICATION_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}

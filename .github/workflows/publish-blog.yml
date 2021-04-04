@@ -36,10 +36,8 @@ jobs:
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
   deploy-beta:
-    name: Deploy Prod
-    environment:
-      name: Beta
-      url: ${{ secrets.APPLICATION_URL }}
+    name: Deploy Beta
+    environment: Beta
     runs-on: ubuntu-latest
     steps:
     - name: Download artifacts
@@ -55,9 +53,7 @@ jobs:
   deploy-prod:
     needs: deploy-beta
     name: Deploy Prod
-    environment:
-      name: Prod
-      url: ${{ secrets.APPLICATION_URL }}
+    environment: Prod
     runs-on: ubuntu-latest
     steps:
     - name: Download artifacts

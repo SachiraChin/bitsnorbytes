@@ -11,7 +11,7 @@
     "@microsoft/applicationinsights-react-js": "^3.1.0",
     "@microsoft/applicationinsights-web": "^2.6.1",
     "emotion-theming": "^11.0.0",
-    "gatsby": "^3.2.1",
+    "gatsby": "^4.22.1",
     "gatsby-image": "^3.2.0",
     "gatsby-plugin-emotion": "^6.2.0",
     "gatsby-plugin-manifest": "^3.2.0",
